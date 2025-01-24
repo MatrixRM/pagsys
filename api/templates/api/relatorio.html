@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <title>Relatório do Cliente</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1, h2 { text-align: center; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        table, th, td { border: 1px solid black; }
-        th, td { padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Relatório do Cliente</h1>
-    <p><strong>Razão Social:</strong> {{ cliente.razao_social }}</p>
-    <p><strong>CNPJ:</strong> {{ cliente.cnpj }}</p>
+    <div class="container">
+        <h1>Relatório do Cliente</h1>
+        <p><strong>Cliente:</strong> {{ cliente.razao_social }}</p>
+        <p><strong>CNPJ:</strong> {{ cliente.cnpj }}</p>
 
-    <h2>Produtos e Preços</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Preço</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for preco in precos %}
-            <tr>
-                <td>{{ preco.produto.descricao }}</td>
-                <td>R$ {{ preco.preco }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <h2>Produtos e Preços</h2>
+        <table class="tabela-relatorio">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for preco in precos %}
+                <tr>
+                    <td>{{ preco.produto.descricao }}</td>
+                    <td>R$ {{ preco.preco }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="acoes">
+            <!-- Botão para gerar cobrança PIX -->
+            <form action="{% url 'exibir_pix' %}" method="get" style="display: inline-block;">
+                <input type="hidden" name="valor" value="{{ total_valor }}">
+                <input type="hidden" name="descricao" value="Cobrança para {{ cliente.razao_social }}">
+                <input type="hidden" name="email" value="cliente@exemplo.com">
+                <button type="submit" class="btn btn-cobrar">Gerar Cobrança PIX</button>
+            </form>
+
+            <!-- Botão para exportar relatório em PDF -->
+            <form action="{% url 'gerar_pdf' cliente.id %}" method="get" style="display: inline-block;">
+                <button type="submit" class="btn btn-pdf">Exportar para PDF</button>
+            </form>
+        </div>
+
+        <div>
+            <a href="/" class="btn btn-voltar">Voltar</a>
+        </div>
+    </div>
 </body>
 </html>

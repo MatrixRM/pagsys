@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/qrcode.css' %}">
+    <title>Pagamento via PIX</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Pagamento via PIX</h1>
+        <p>Use o QR Code abaixo para realizar o pagamento:</p>
+        <div class="qr-code">
+            <img src="data:image/png;base64,{{ qr_code_base64 }}" alt="QR Code PIX">
+        </div>
+        <div class="details">
+            <p><strong>Valor:</strong> R$ {{ valor }}</p>
+            <p><strong>Descrição:</strong> {{ descricao }}</p>
+            <p><strong>Código PIX:</strong></p>
+            <p style="word-wrap: break-word; color: #007bff; font-size: 14px;">{{ qr_code }}</p>
+        </div>
+        <a href="/" class="btn">Voltar</a>
+    </div>
+</body>
+</html>

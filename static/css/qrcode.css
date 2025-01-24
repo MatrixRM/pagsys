@@ -1,0 +1,77 @@
+/* Estilo base para o corpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
+/* Contêiner principal */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Título */
+h1 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Parágrafo de instrução */
+p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Estilo do QR Code */
+.qr-code img {
+    width: 250px;
+    height: 250px;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Detalhes do pagamento */
+.details {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #444;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+/* Botão */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    background-color: #004080;
+    transform: translateY(1px);
+}

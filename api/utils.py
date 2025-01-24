@@ -2,6 +2,8 @@ from twilio.rest import Client
 from django.conf import settings
 from .models import Preco
 import logging
+import mercadopago
+from django.conf import settings
 
 
 
@@ -47,3 +49,33 @@ def verificar_alteracao_preco(produto, novo_preco):
 
 
 
+
+
+
+def gerar_cobranca_pix(valor, descricao, email):
+    """
+    Gera um pagamento PIX dinâmico via Mercado Pago.
+    """
+    sdk = mercadopago.SDK(settings.MERCADOPAGO_ACCESS_TOKEN)
+
+    payment_data = {
+        "transaction_amount": valor,  # Valor da cobrança
+        "description": descricao,  # Descrição do pagamento
+        "payment_method_id": "pix",  # Método de pagamento PIX
+        "payer": {  # Informações do pagador
+            "email": email,  # E-mail do cliente
+            "first_name": "Cliente",
+            "last_name": "Teste",
+            "identification": {
+                "type": "CPF",
+                "number": "12345678909"
+            }
+        }
+    }
+
+    payment_response = sdk.payment().create(payment_data)
+
+    if payment_response["status"] == 201:  # Pagamento criado com sucesso
+        return payment_response["response"]
+    else:
+        raise Exception(f"Erro ao criar pagamento: {payment_response}")
