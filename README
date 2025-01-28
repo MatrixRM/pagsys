@@ -87,7 +87,7 @@ O **PagSys** é uma aplicação web desenvolvida em Django para gerenciar client
 
 ### 1. Acesse o Django Admin
 
-- URL: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+- URL: http://127.0.0.1:8000/admin/
 - Utilize as credenciais criadas com o comando:
   ```bash
   python manage.py createsuperuser
@@ -155,8 +155,5 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 Em caso de dúvidas ou sugestões, entre em contato:
 
-- **Email**: [robertomanica@yahoo.com.br](mailto\:robertomanica@yahoo.com.br)
-- **LinkedIn**: [https://www.linkedin.com/in/roberto-m%C3%A2nica-0876a21b7/](https://www.linkedin.com/in/roberto-m%C3%A2nica-0876a21b7/)
-
----
-
+- **Email**: robertomanica@yahoo.com.br
+- **LinkedIn**: https://www.linkedin.com/in/roberto-m%C3%A2nica-0876a21b7/
