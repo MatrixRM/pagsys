@@ -71,32 +71,29 @@ def pagina_principal(request):
     return render(request, 'api/pagina_principal.html', context)
 
 
+from django.shortcuts import render, get_object_or_404
+from .models import Cliente, Preco
+
 def gerar_relatorio(request, cliente_id):
+    """
+    Renderiza o relatório do cliente diretamente no navegador em formato HTML.
+    """
     # Obter cliente e preços associados
     cliente = get_object_or_404(Cliente, id=cliente_id)
     precos = Preco.objects.filter(cliente=cliente)
     total_valor = sum(preco.preco for preco in precos)  # Calcula o valor total
 
     # Renderizar o template HTML
-    template = get_template('api/relatorio.html')
     context = {
         'cliente': cliente,
         'precos': precos,
         'total_valor': total_valor
     }
-    html = template.render(context)
+    return render(request, 'api/relatorio.html', context)
 
-    # Gerar o PDF
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="relatorio_{cliente.razao_social}.pdf"'
-    
-    pisa_status = pisa.CreatePDF(html, dest=response)
 
-    if pisa_status.err:
-        logger.error("Erro ao gerar o PDF para o cliente %s", cliente.razao_social)
-        return HttpResponse('Erro ao gerar o PDF', status=500)
 
-    return HttpResponse(html)
+
 
 
 
